@@ -4,19 +4,24 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     agenix.url = "github:ryantm/agenix";
+    hydra.url = "github:nixos/hydra";
   };
 
-  outputs = inputs@{ self, nixpkgs, agenix, }:
-    let
-      system = "x86_64-linux";
-      lib = nixpkgs.lib;
-      availableModules = { inherit (agenix.nixosModules) age; };
+  outputs = inputs@{ self, nixpkgs, agenix, hydra, }:
+    let system = "x86_64-linux";
     in {
       nixosConfigurations = {
-        everest-ci = lib.nixosSystem {
+        everest-ci = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = (builtins.attrValues availableModules)
-            ++ [ ./hardware.nix ./base.nix ./fusion-inventory.nix ./hydra.nix ];
+          modules = [
+            { nixpkgs.overlays = [ hydra.overlay ]; }
+            agenix.nixosModules.age
+            ./base.nix
+            ./hardware.nix
+            ./fusion-inventory.nix
+            ./declarative-hydra.nix
+            ./hydra.nix
+          ];
         };
       };
     };

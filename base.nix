@@ -17,12 +17,10 @@
   users.users.everest = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINta9hgVN7WHEbVWeXeUFimDY4EP7WgkW6psxS1U4IHk" # pnm laptop
-    ];
+    openssh.authorizedKeys.keys = import ./keys.nix;
   };
 
-  environment.systemPackages = with pkgs; [ vim wget htop git ];
+  environment.systemPackages = with pkgs; [ vim wget htop git tmux ];
 
   services.openssh = {
     enable = true;
@@ -38,6 +36,11 @@
       experimental-features = nix-command flakes
       warn-dirty = false
     '';
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 1d";
+    };
   };
 
   age.secrets."everest-ci.cer" = {
@@ -53,6 +56,7 @@
   services.nginx = {
     enable = true;
     recommendedTlsSettings = true;
+    recommendedProxySettings = true;
 
     virtualHosts."everest-ci.paris.inria.fr" = {
       default = true;
