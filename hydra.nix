@@ -68,11 +68,11 @@
          context = Hydra
        </githubstatus>
        <githubstatus>
-         jobs = everest:.*:hacl.x86_64-linux
+         jobs = hacl-nix:.*:hacl.x86_64-linux
          excludeBuildFromContext = 1
-         overrideOwner = project-everest
-         overrideRepo = everest-nix
-         context = Everest Hydra
+         overrideOwner = hacl-star
+         overrideRepo = hacl-nix
+         context = Hydra
        </githubstatus>
        <githubstatus>
          jobs = comparse:.*:comparse-tests.x86_64-linux
@@ -155,11 +155,13 @@
          repo = "hacl-star";
          branch = "main";
        };
-       everest = mkGhProject {
-         displayname = "Everest";
-         description = "Efficient, verified components for the HTTPS ecosystem";
-         owner = "project-everest";
-         repo = "everest-nix";
+       hacl-nix = mkGhProject {
+         displayname = "Hacl Nix";
+         description =
+           "A formally verified library of modern cryptographic algorithms";
+         owner = "hacl-star";
+         repo = "hacl-nix";
+         branch = "main";
        };
      };
    };
