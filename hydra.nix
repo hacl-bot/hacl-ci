@@ -65,7 +65,7 @@
          excludeBuildFromContext = 1
          overrideOwner = hacl-star
          overrideRepo = hacl-star
-         context = Everest Hydra
+         context = Hydra
        </githubstatus>
        <githubstatus>
          jobs = everest:.*:hacl.x86_64-linux
