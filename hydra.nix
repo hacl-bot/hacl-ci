@@ -104,7 +104,7 @@
              { "enabled": 1,
                "hidden": false,
                "description": "Everest Jobsets",
-               "nixexprinput": "everest-nix",
+               "nixexprinput": "hacl-nix",
                "nixexprpath": "hydra-helpers/generate-jobsets.nix",
                "checkinterval": 3600,
                "schedulingshares": 100,
@@ -112,9 +112,9 @@
                "emailoverride": "",
                "keepnr": 3,
                "inputs": {
-                 "everest-nix": {
+                 "hacl-nix": {
                    "type": "git",
-                   "value": "https://github.com/project-everest/everest-nix.git master"
+                   "value": "https://github.com/hacl-star/hacl-nix.git main"
                  },
                  "src": {
                    "type": "git",
