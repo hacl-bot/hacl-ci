@@ -21,6 +21,7 @@
             ./fusion-inventory.nix
             ./declarative-hydra.nix
             ./hydra.nix
+            ./catala.nix
           ];
         };
       };
