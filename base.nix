@@ -31,11 +31,7 @@
 
   nix = {
     settings.trusted-users = [ "@wheel" ];
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-      warn-dirty = false
-    '';
+    settings.experimental-features = [ "nix-command" "flakes" ];
     gc = {
       automatic = true;
       dates = "daily";
