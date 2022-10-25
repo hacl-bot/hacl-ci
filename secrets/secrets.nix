@@ -6,6 +6,7 @@ in {
 
   # hydra tokens
   "github-token-hydra.age".publicKeys = keys;
+  "slack-token-hydra.age".publicKeys = keys;
   "github-token-nix-conf.age".publicKeys = keys;
   "hydra-users.age".publicKeys = keys;
   "id_ed25519.age".publicKeys = keys;

@@ -6,6 +6,7 @@
        ./hydra-patches/gh-webhook.diff
        ./hydra-patches/disable-restrict-eval.diff
        ./hydra-patches/status-override.diff
+       ./hydra-patches/slack-notification.diff
      ];
      doCheck = false;
    });
@@ -30,6 +31,11 @@
    };
    age.secrets.github-token-hydra = {
      file = ./secrets/github-token-hydra.age;
+     owner = "hydra";
+     mode = "0440";
+   };
+   age.secrets.slack-token-hydra = {
+     file = ./secrets/slack-token-hydra.age;
      owner = "hydra";
      mode = "0440";
    };
@@ -81,6 +87,7 @@
          jobs = mls-star:.*:mls-tests.x86_64-linux
        </githubstatus>
        Include ${config.age.secrets.github-token-hydra.path}
+       Include ${config.age.secrets.slack-token-hydra.path}
      '';
    };
 
