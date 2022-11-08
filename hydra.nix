@@ -86,6 +86,9 @@
        <githubstatus>
          jobs = mls-star:.*:mls-tests.x86_64-linux
        </githubstatus>
+       <githubstatus>
+         jobs = charon:.*:*.x86_64-linux
+       </githubstatus>
        Include ${config.age.secrets.github-token-hydra.path}
        Include ${config.age.secrets.slack-token-hydra.path}
      '';
@@ -168,6 +171,14 @@
            "A formally verified library of modern cryptographic algorithms";
          owner = "hacl-star";
          repo = "hacl-nix";
+         branch = "main";
+       };
+       charon = mkGhProject {
+         displayname = "Charon";
+         description =
+           "Interface with the rustc compiler for the purpose of program verification";
+         owner = "aeneasverif";
+         repo = "charon";
          branch = "main";
        };
      };
