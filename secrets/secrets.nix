@@ -10,4 +10,7 @@ in {
   "github-token-nix-conf.age".publicKeys = keys;
   "hydra-users.age".publicKeys = keys;
   "id_ed25519.age".publicKeys = keys;
+
+  # binary cache
+  "cache-priv-key.age".publicKeys = keys;
 }

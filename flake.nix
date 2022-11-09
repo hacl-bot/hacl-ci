@@ -22,6 +22,7 @@
             ./declarative-hydra.nix
             ./hydra.nix
             ./catala.nix
+            ./cache.nix
           ];
         };
       };
