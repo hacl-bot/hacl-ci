@@ -63,21 +63,13 @@
        evaluator_pure_eval = false
        <githubstatus>
          jobs = comparse:.*
-         excludeBuildFromContext = 1
-         useShortContext = 1
        </githubstatus>
        <githubstatus>
          jobs = hacl-star:.*:hacl.x86_64-linux
-         excludeBuildFromContext = 1
-         overrideOwner = hacl-star
-         overrideRepo = hacl-star
          context = Hydra
        </githubstatus>
        <githubstatus>
          jobs = hacl-nix:.*:hacl.x86_64-linux
-         excludeBuildFromContext = 1
-         overrideOwner = hacl-star
-         overrideRepo = hacl-nix
          context = Hydra
        </githubstatus>
        <githubstatus>
