@@ -79,7 +79,32 @@
          jobs = mls-star:.*:mls-tests.x86_64-linux
        </githubstatus>
        <githubstatus>
-         jobs = charon:.*:*.x86_64-linux
+         jobs = charon:.*:charon.x86_64-linux
+         context = Charon build
+       </githubstatus>
+       <githubstatus>
+         jobs = charon:.*:tests.x86_64-linux
+         context = Charon tests
+       </githubstatus>
+       <githubstatus>
+         jobs = charon:.*:tests-polonius.x86_64-linux
+         context = Charon tests-polonius
+       </githubstatus>
+       <githubstatus>
+         jobs = charon:.*:charon-ml.x86_64-linux
+         context = Charon ML
+       </githubstatus>
+       <githubstatus>
+         jobs = charon:.*:charon-ml.x86_64-linux
+         context = Charon ML
+       </githubstatus>
+       <githubstatus>
+         jobs = aeneas:.*:aeneas.x86_64-linux
+         context = Aeneas build
+       </githubstatus>
+       <githubstatus>
+         jobs = aeneas:.*:aeneas-tests.x86_64-linux
+         context = Aeneas tests
        </githubstatus>
        Include ${config.age.secrets.github-token-hydra.path}
        Include ${config.age.secrets.slack-token-hydra.path}
@@ -171,6 +196,14 @@
            "Interface with the rustc compiler for the purpose of program verification";
          owner = "aeneasverif";
          repo = "charon";
+         branch = "main";
+       };
+       aeneas = mkGhProject {
+         displayname = "Aeneas";
+         description =
+           "A verification toolchain for Rust programs";
+         owner = "aeneasverif";
+         repo = "aeneas";
          branch = "main";
        };
      };
