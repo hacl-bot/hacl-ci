@@ -62,49 +62,52 @@
      extraConfig = ''
        evaluator_pure_eval = false
        <githubstatus>
-         jobs = comparse:.*
-       </githubstatus>
-       <githubstatus>
          jobs = hacl-star:.*:hacl.x86_64-linux
          context = Hydra
+         overrideOwner = hacl-star
+         overrideRepo = hacl-star
        </githubstatus>
        <githubstatus>
          jobs = hacl-nix:.*:hacl.x86_64-linux
          context = Hydra
-       </githubstatus>
-       <githubstatus>
-         jobs = comparse:.*:comparse-tests.x86_64-linux
-       </githubstatus>
-       <githubstatus>
-         jobs = mls-star:.*:mls-tests.x86_64-linux
+         overrideOwner = hacl-star
+         overrideRepo = hacl-nix
        </githubstatus>
        <githubstatus>
          jobs = charon:.*:charon.x86_64-linux
          context = Charon build
+         overrideOwner = aeneasverif
+         overrideRepo = charon
        </githubstatus>
        <githubstatus>
          jobs = charon:.*:tests.x86_64-linux
          context = Charon tests
+         overrideOwner = aeneasverif
+         overrideRepo = charon
        </githubstatus>
        <githubstatus>
          jobs = charon:.*:tests-polonius.x86_64-linux
          context = Charon tests-polonius
+         overrideOwner = aeneasverif
+         overrideRepo = charon
        </githubstatus>
        <githubstatus>
          jobs = charon:.*:charon-ml.x86_64-linux
          context = Charon ML
-       </githubstatus>
-       <githubstatus>
-         jobs = charon:.*:charon-ml.x86_64-linux
-         context = Charon ML
+         overrideOwner = aeneasverif
+         overrideRepo = charon
        </githubstatus>
        <githubstatus>
          jobs = aeneas:.*:aeneas.x86_64-linux
          context = Aeneas build
+         overrideOwner = aeneasverif
+         overrideRepo = aeneas
        </githubstatus>
        <githubstatus>
          jobs = aeneas:.*:aeneas-tests.x86_64-linux
          context = Aeneas tests
+         overrideOwner = aeneasverif
+         overrideRepo = aeneas
        </githubstatus>
        Include ${config.age.secrets.github-token-hydra.path}
        Include ${config.age.secrets.slack-token-hydra.path}
@@ -200,8 +203,7 @@
        };
        aeneas = mkGhProject {
          displayname = "Aeneas";
-         description =
-           "A verification toolchain for Rust programs";
+         description = "A verification toolchain for Rust programs";
          owner = "aeneasverif";
          repo = "aeneas";
          branch = "main";
