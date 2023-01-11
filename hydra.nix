@@ -109,6 +109,18 @@
          overrideOwner = aeneasverif
          overrideRepo = aeneas
        </githubstatus>
+       <githubstatus>
+         jobs = aeneas:.*:aeneas-verify-fstar.x86_64-linux
+         context = Aeneas F*
+         overrideOwner = aeneasverif
+         overrideRepo = aeneas
+       </githubstatus>
+       <githubstatus>
+         jobs = aeneas:.*:aeneas-verify-coq.x86_64-linux
+         context = Aeneas Coq
+         overrideOwner = aeneasverif
+         overrideRepo = aeneas
+       </githubstatus>
        Include ${config.age.secrets.github-token-hydra.path}
        Include ${config.age.secrets.slack-token-hydra.path}
      '';
