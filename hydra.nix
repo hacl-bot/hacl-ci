@@ -49,6 +49,16 @@
      owner = "hydra";
      mode = "0440";
    };
+   age.secrets.hydraDeployKey1 = {
+     file = ./secrets/hydra-deploy-key-1.age;
+     owner = "hydra";
+     mode = "0440";
+   };
+   age.secrets.hydraDeployKey2 = {
+     file = ./secrets/hydra-deploy-key-2.age;
+     owner = "hydra";
+     mode = "0440";
+   };
 
    services.hydra = {
      enable = true;
@@ -133,8 +143,18 @@
        include ${config.age.secrets.github-token-nix-conf.path}
      '';
      sshKeys = {
-       privateKeyFile = config.age.secrets.hydra-privateKey.path;
-       publicKeyFile = ./secrets/id_ed25519.pub;
+       id_ed25519 = {
+         privateKeyFile = config.age.secrets.hydra-privateKey.path;
+         publicKeyFile = ./secrets/id_ed25519.pub;
+       };
+       deploy_key_1 = {
+         privateKeyFile = config.age.secrets.hydraDeployKey1.path;
+         publicKeyFile = ./secrets/hydra-deploy-key-1.pub;
+       };
+       deploy_key_2 = {
+         privateKeyFile = config.age.secrets.hydraDeployKey2.path;
+         publicKeyFile = ./secrets/hydra-deploy-key-2.pub;
+       };
      };
      projects = let
        mkGhProject = { displayname, description, owner, repo, branch ? "master"

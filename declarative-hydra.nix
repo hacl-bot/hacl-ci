@@ -127,6 +127,12 @@ let
     });
   };
   cfg = config.services.declarative-hydra;
+  catSshKeys = lib.foldl (a: b: a + b) "" (lib.mapAttrsToList (name: keys: ''
+    cat ${keys.privateKeyFile} > $HOME/.ssh/${name}
+    cat ${keys.publicKeyFile} > $HOME/.ssh/${name}.pub
+    chmod 600 $HOME/.ssh/${name}
+    chmod 600 $HOME/.ssh/${name}.pub
+  '') cfg.sshKeys);
 in {
   options.services.declarative-hydra = {
     enable = lib.mkEnableOption "Declarative hydra";
@@ -142,10 +148,10 @@ in {
 
     hydraNixConf = lib.mkOption { type = types.str; };
     sshKeys = lib.mkOption {
-      default = null;
+      default = { };
       description =
         "SSH keys for the Hydra user. This is useful for eg private repos.";
-      type = types.nullOr (types.submodule {
+      type = types.attrsOf (types.submodule {
         options = {
           publicKeyFile = lib.mkOption {
             description = "Path to the ed25519 public key";
@@ -172,16 +178,13 @@ in {
         config.systemd.services.hydra-evaluator.environment;
       serviceConfig = {
         User = "hydra";
-        ExecStart = "${(pkgs.writeScript "declarative-hydra" ''
+        ExecStart = "${pkgs.writeScript "declarative-hydra" ''
           #!${pkgs.bash}/bin/bash
           mkdir -p $HOME/.config/nix
-          echo "$hydraNixConf" > $HOME/.config/nix/nix.conf
+          echo "${cfg.hydraNixConf}" > $HOME/.config/nix/nix.conf
 
           mkdir -p $HOME/.ssh/
-          cat '${cfg.sshKeys.privateKeyFile}' > $HOME/.ssh/id_ed25519
-          cat '${cfg.sshKeys.publicKeyFile}'  > $HOME/.ssh/id_ed25519.pub
-          chmod 600 $HOME/.ssh/id_ed25519
-          chmod 600 $HOME/.ssh/id_ed25519.pub
+          ${catSshKeys}
 
           sleep 4
           cat "${cfg.usersFile}" <(echo) | while IFS= read -r line; do
@@ -217,7 +220,7 @@ in {
               builtins.toJSON (def // { name = id; })
             }'") cfg.projects)}
           rm "$cookie"
-        '').overrideAttrs (_: { inherit (cfg) hydraNixConf; })}";
+        ''}";
       };
     };
   };
