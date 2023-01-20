@@ -56,8 +56,7 @@
 
     virtualHosts."everest-ci.paris.inria.fr" = {
       default = true;
-      #forceSSL = true;
-      addSSL = true;
+      forceSSL = true;
       sslCertificate = config.age.secrets."everest-ci.cer".path;
       sslCertificateKey = config.age.secrets."everest-ci.key".path;
     };
