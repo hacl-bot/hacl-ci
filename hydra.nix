@@ -131,6 +131,12 @@
          overrideOwner = aeneasverif
          overrideRepo = aeneas
        </githubstatus>
+       <githubstatus>
+         jobs = aeneas:.*:aeneas-verify-hol4.x86_64-linux
+         context = Aeneas HOL4
+         overrideOwner = aeneasverif
+         overrideRepo = aeneas
+       </githubstatus>
        Include ${config.age.secrets.github-token-hydra.path}
        Include ${config.age.secrets.slack-token-hydra.path}
      '';
