@@ -4,15 +4,9 @@ in {
   "everest-ci.cer.age".publicKeys = keys;
   "everest-ci.key.age".publicKeys = keys;
 
-  # hydra tokens
-  "github-token-hydra.age".publicKeys = keys;
-  "slack-token-hydra.age".publicKeys = keys;
-  "github-token-nix-conf.age".publicKeys = keys;
-  "hydra-users.age".publicKeys = keys;
-  "id_ed25519.age".publicKeys = keys;
-  "hydra-deploy-key-1.age".publicKeys = keys;
-  "hydra-deploy-key-2.age".publicKeys = keys;
-
   # binary cache
   "cache-priv-key.age".publicKeys = keys;
+
+  # github runner
+  "github-runner-token.age".publicKeys = keys;
 }
