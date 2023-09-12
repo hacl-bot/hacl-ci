@@ -20,6 +20,7 @@
             #./catala.nix
             ./cache.nix
             ./github-runner.nix
+            ./gitlab-runner.nix
           ];
         };
       };

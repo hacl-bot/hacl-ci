@@ -9,4 +9,7 @@ in {
 
   # github runner
   "github-runner-token.age".publicKeys = keys;
+
+  # gitlab runner
+  "gitlab-runner-registration.age".publicKeys = keys;
 }
