@@ -12,4 +12,7 @@ in {
 
   # gitlab runner
   "gitlab-runner-registration.age".publicKeys = keys;
+
+  # cachix
+  "cachix-hacl-token.age".publicKeys = keys;
 }
