@@ -1,12 +1,11 @@
-{ config, lib, ... }:
-
-let
-
+{
+  config,
+  lib,
+  ...
+}: let
   user = "cachix-watch-store";
-
 in {
-
-  users.groups.${user} = { };
+  users.groups.${user} = {};
   users.users.${user} = {
     isSystemUser = true;
     group = user;
@@ -19,9 +18,8 @@ in {
   };
 
   nix.settings = {
-    substituters = [ "https://hacl.cachix.org/" ];
-    trusted-public-keys =
-      [ "hacl.cachix.org-1:FzsZ2xsByOwKwIWNPII7yMOelJNDZ12mDAj3d1eGX0c=" ];
+    substituters = ["https://hacl.cachix.org/"];
+    trusted-public-keys = ["hacl.cachix.org-1:FzsZ2xsByOwKwIWNPII7yMOelJNDZ12mDAj3d1eGX0c="];
   };
 
   services.cachix-watch-store = {
@@ -35,5 +33,4 @@ in {
     User = user;
     Group = user;
   };
-
 }

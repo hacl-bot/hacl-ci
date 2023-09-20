@@ -1,5 +1,5 @@
-{ config, ... }: {
-  age.secrets."cache-priv-key.pem" = { file = ./secrets/cache-priv-key.age; };
+{config, ...}: {
+  age.secrets."cache-priv-key.pem" = {file = ./secrets/cache-priv-key.age;};
   services.nix-serve = {
     enable = true;
     secretKeyFile = config.age.secrets."cache-priv-key.pem".path;

@@ -1,4 +1,5 @@
-let keys = import ../keys.nix;
+let
+  keys = import ../keys.nix;
 in {
   # https certificate
   "everest-ci.cer.age".publicKeys = keys;
