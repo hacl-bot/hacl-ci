@@ -16,6 +16,8 @@
     keyMap = "us";
   };
 
+  security.sudo.wheelNeedsPassword = false;
+
   users.users.everest = {
     isNormalUser = true;
     extraGroups = ["wheel"];
