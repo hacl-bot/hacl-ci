@@ -29,6 +29,7 @@
         "/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro"
       ];
       dockerDisableCache = true;
+      dockerPrivileged = true;
       preBuildScript = pkgs.writeScript "setup-container" ''
         mkdir -p -m 0755 /nix/var/log/nix/drvs
         mkdir -p -m 0755 /nix/var/nix/gcroots
@@ -39,6 +40,9 @@
         mkdir -p -m 1777 /nix/var/nix/profiles/per-user
         mkdir -p -m 0755 /nix/var/nix/profiles/per-user/root
         mkdir -p -m 0700 "$HOME/.nix-defexpr"
+
+        mkdir -p /etc/nix
+        echo "sandbox = true" > /etc/nix/nix.conf
 
         . ${pkgs.nix}/etc/profile.d/nix.sh
 
