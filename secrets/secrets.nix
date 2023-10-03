@@ -8,8 +8,9 @@ in {
   # binary cache
   "cache-priv-key.age".publicKeys = keys;
 
-  # github runner
-  "github-runner-token.age".publicKeys = keys;
+  # github runners
+  "github-runner-everest-ci-token.age".publicKeys = keys;
+  "github-runner-starmalloc-ci-token.age".publicKeys = keys;
 
   # gitlab runner
   "gitlab-runner-registration.age".publicKeys = keys;

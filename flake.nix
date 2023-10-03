@@ -29,7 +29,7 @@
             ./fusion-inventory.nix
             #./catala.nix
             ./cache.nix
-            ./github-runner.nix
+            ./github-runners.nix
             ./gitlab-runner.nix
             ./cachix.nix
           ];
