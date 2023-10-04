@@ -10,16 +10,16 @@
     group = "github-runner";
   };
 
-  age.secrets.github-runner-everest-ci-token = {
-    file = ./secrets/github-runner-everest-ci-token.age;
+  age.secrets.github-runner-hacl-ci-token = {
+    file = ./secrets/github-runner-hacl-ci-token.age;
     owner = "github-runner";
     mode = "0440";
   };
-  services.github-runners."everest-ci" = {
+  services.github-runners."hacl-ci" = {
     enable = true;
-    url = "https://github.com/hacl-star";
+    url = "https://github.com/hacl-star/hacl-star";
     user = "github-runner";
-    tokenFile = config.age.secrets.github-runner-everest-ci-token.path;
+    tokenFile = config.age.secrets.github-runner-hacl-ci-token.path;
     nodeRuntimes = ["node16" "node20"];
     extraLabels = ["nix"];
   };
