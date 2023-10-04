@@ -32,6 +32,7 @@
             ./github-runners.nix
             ./gitlab-runner.nix
             ./cachix.nix
+            ./doc.nix
           ];
         };
       };
