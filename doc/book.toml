@@ -3,4 +3,4 @@ authors = ["Paul-Nicolas Madelaine"]
 language = "en"
 multilingual = false
 src = "src"
-title = "Documentation for Hacl* CI"
+title = "Documentation for HACL*'s CI"
