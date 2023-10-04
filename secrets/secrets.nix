@@ -10,6 +10,7 @@ in {
 
   # github runners
   "github-runner-hacl-ci-token.age".publicKeys = keys;
+  "github-runner-hacl-nix-ci-token.age".publicKeys = keys;
   "github-runner-starmalloc-ci-token.age".publicKeys = keys;
 
   # gitlab runner

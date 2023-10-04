@@ -24,6 +24,20 @@
     extraLabels = ["nix"];
   };
 
+  age.secrets.github-runner-hacl-nix-ci-token = {
+    file = ./secrets/github-runner-hacl-nix-ci-token.age;
+    owner = "github-runner";
+    mode = "0440";
+  };
+  services.github-runners."hacl-nix-ci" = {
+    enable = true;
+    url = "https://github.com/hacl-star/hacl-nix";
+    user = "github-runner";
+    tokenFile = config.age.secrets.github-runner-hacl-nix-ci-token.path;
+    nodeRuntimes = ["node16" "node20"];
+    extraLabels = ["nix"];
+  };
+
   age.secrets.github-runner-starmalloc-ci-token = {
     file = ./secrets/github-runner-starmalloc-ci-token.age;
     owner = "github-runner";
