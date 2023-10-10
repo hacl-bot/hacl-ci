@@ -45,7 +45,7 @@
   };
   services.github-runners."starmalloc-ci" = {
     enable = true;
-    url = "https://github.com/cmovcc/starmalloc";
+    url = "https://github.com/inria-prosecco/starmalloc";
     user = "github-runner";
     tokenFile = config.age.secrets.github-runner-starmalloc-ci-token.path;
     nodeRuntimes = ["node16" "node20"];
