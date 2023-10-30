@@ -3,124 +3,39 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  aux = name: url: {
+    age.secrets."github-runner-${name}-ci-token" = {
+      file = ./secrets/github-runner-${name}-ci-token.age;
+      owner = "github-runner";
+      mode = "0440";
+    };
+    services.github-runners."${name}-ci" = {
+      enable = true;
+      inherit url;
+      user = "github-runner";
+      tokenFile = config.age.secrets."github-runner-${name}-ci-token".path;
+      nodeRuntimes = ["node16" "node20"];
+      extraLabels = ["nix"];
+    };
+  };
+in {
   users.groups."github-runner" = {};
   users.users."github-runner" = {
     isSystemUser = true;
     group = "github-runner";
   };
 
-  age.secrets.github-runner-hacl-ci-token = {
-    file = ./secrets/github-runner-hacl-ci-token.age;
-    owner = "github-runner";
-    mode = "0440";
-  };
-  services.github-runners."hacl-ci" = {
-    enable = true;
-    url = "https://github.com/hacl-star/hacl-star";
-    user = "github-runner";
-    tokenFile = config.age.secrets.github-runner-hacl-ci-token.path;
-    nodeRuntimes = ["node16" "node20"];
-    extraLabels = ["nix"];
-  };
-
-  age.secrets.github-runner-hacl-nix-ci-token = {
-    file = ./secrets/github-runner-hacl-nix-ci-token.age;
-    owner = "github-runner";
-    mode = "0440";
-  };
-  services.github-runners."hacl-nix-ci" = {
-    enable = true;
-    url = "https://github.com/hacl-star/hacl-nix";
-    user = "github-runner";
-    tokenFile = config.age.secrets.github-runner-hacl-nix-ci-token.path;
-    nodeRuntimes = ["node16" "node20"];
-    extraLabels = ["nix"];
-  };
-
-  age.secrets.github-runner-starmalloc-ci-token = {
-    file = ./secrets/github-runner-starmalloc-ci-token.age;
-    owner = "github-runner";
-    mode = "0440";
-  };
-  services.github-runners."starmalloc-ci" = {
-    enable = true;
-    url = "https://github.com/inria-prosecco/starmalloc";
-    user = "github-runner";
-    tokenFile = config.age.secrets.github-runner-starmalloc-ci-token.path;
-    nodeRuntimes = ["node16" "node20"];
-    extraLabels = ["nix"];
-  };
-
-  age.secrets.github-runner-charon-ci-token = {
-    file = ./secrets/github-runner-charon-ci-token.age;
-    owner = "github-runner";
-    mode = "0440";
-  };
-  services.github-runners."charon-ci" = {
-    enable = true;
-    url = "https://github.com/aeneasverif/charon";
-    user = "github-runner";
-    tokenFile = config.age.secrets.github-runner-charon-ci-token.path;
-    nodeRuntimes = ["node16" "node20"];
-    extraLabels = ["nix"];
-  };
-
-  age.secrets.github-runner-aeneas-ci-token = {
-    file = ./secrets/github-runner-aeneas-ci-token.age;
-    owner = "github-runner";
-    mode = "0440";
-  };
-  services.github-runners."aeneas-ci" = {
-    enable = true;
-    url = "https://github.com/aeneasverif/aeneas";
-    user = "github-runner";
-    tokenFile = config.age.secrets.github-runner-aeneas-ci-token.path;
-    nodeRuntimes = ["node16" "node20"];
-    extraLabels = ["nix"];
-  };
-
-  age.secrets.github-runner-mls-star-ci-token = {
-    file = ./secrets/github-runner-mls-star-ci-token.age;
-    owner = "github-runner";
-    mode = "0440";
-  };
-  services.github-runners."mls-star-ci" = {
-    enable = true;
-    url = "https://github.com/inria-prosecco/mls-star";
-    user = "github-runner";
-    tokenFile = config.age.secrets.github-runner-mls-star-ci-token.path;
-    nodeRuntimes = ["node16" "node20"];
-    extraLabels = ["nix"];
-  };
-
-  age.secrets.github-runner-comparse-ci-token = {
-    file = ./secrets/github-runner-comparse-ci-token.age;
-    owner = "github-runner";
-    mode = "0440";
-  };
-  services.github-runners."comparse-ci" = {
-    enable = true;
-    url = "https://github.com/twal/comparse";
-    user = "github-runner";
-    tokenFile = config.age.secrets.github-runner-comparse-ci-token.path;
-    nodeRuntimes = ["node16" "node20"];
-    extraLabels = ["nix"];
-  };
-
-  age.secrets.github-runner-dolev-yao-star-ci-token = {
-    file = ./secrets/github-runner-dolev-yao-star-ci-token.age;
-    owner = "github-runner";
-    mode = "0440";
-  };
-  services.github-runners."dolev-yao-star-ci" = {
-    enable = true;
-    url = "https://github.com/twal/dolev-yao-star-v3";
-    user = "github-runner";
-    tokenFile = config.age.secrets.github-runner-dolev-yao-star-ci-token.path;
-    nodeRuntimes = ["node16" "node20"];
-    extraLabels = ["nix"];
-  };
+  imports = [
+    (aux "hacl" "https://github.com/hacl-star/hacl-star")
+    (aux "hacl-nix" "https://github.com/hacl-star/hacl-nix")
+    (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
+    (aux "charon" "https://github.com/aeneasverif/charon")
+    (aux "aeneas" "https://github.com/aeneasverif/aeneas")
+    (aux "mls-star" "https://github.com/inria-prosecco/mls-star")
+    (aux "comparse" "https://github.com/twal/comparse")
+    (aux "dolev-yao-star" "https://github.com/twal/dolev-yao-star-v3")
+  ];
 
   nixpkgs.config.permittedInsecurePackages = ["nodejs-16.20.2"];
 }
