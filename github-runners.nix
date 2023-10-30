@@ -108,5 +108,19 @@
     extraLabels = ["nix"];
   };
 
+  age.secrets.github-runner-dolev-yao-star-ci-token = {
+    file = ./secrets/github-runner-dolev-yao-star-ci-token.age;
+    owner = "github-runner";
+    mode = "0440";
+  };
+  services.github-runners."dolev-yao-star-ci" = {
+    enable = true;
+    url = "https://github.com/twal/dolev-yao-star-v3";
+    user = "github-runner";
+    tokenFile = config.age.secrets.github-runner-dolev-yao-star-ci-token.path;
+    nodeRuntimes = ["node16" "node20"];
+    extraLabels = ["nix"];
+  };
+
   nixpkgs.config.permittedInsecurePackages = ["nodejs-16.20.2"];
 }
