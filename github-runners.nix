@@ -38,6 +38,7 @@ in {
     (aux "mls-star" "https://github.com/inria-prosecco/mls-star")
     (aux "comparse" "https://github.com/twal/comparse")
     (aux "dolev-yao-star" "https://github.com/twal/dolev-yao-star-v3")
+    (aux "prosecco-green" "https://github.com/inria-prosecco/prosecco-green")
   ];
 
   nixpkgs.config.permittedInsecurePackages = ["nodejs-16.20.2"];

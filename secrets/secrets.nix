@@ -20,6 +20,7 @@ in {
   "github-runner-mls-star-ci-token.age".publicKeys = keys;
   "github-runner-comparse-ci-token.age".publicKeys = keys;
   "github-runner-dolev-yao-star-ci-token.age".publicKeys = keys;
+  "github-runner-prosecco-green-ci-token.age".publicKeys = keys;
 
   # gitlab runner
   "gitlab-runner-registration.age".publicKeys = keys;
