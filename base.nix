@@ -24,7 +24,7 @@
     openssh.authorizedKeys.keys = import ./keys.nix;
   };
 
-  environment.systemPackages = with pkgs; [vim wget htop git tmux];
+  environment.systemPackages = with pkgs; [vim wget htop git tmux jq];
 
   services.openssh = {
     enable = true;
