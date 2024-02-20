@@ -9,7 +9,6 @@ in {
   "cache-priv-key.age".publicKeys = keys;
 
   # github runners
-  "github-runner-hacl-ci-token.age".publicKeys = keys;
   "github-runner-hacl-1-ci-token.age".publicKeys = keys;
   "github-runner-hacl-2-ci-token.age".publicKeys = keys;
   "github-runner-hacl-3-ci-token.age".publicKeys = keys;
