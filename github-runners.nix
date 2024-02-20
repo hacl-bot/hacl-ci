@@ -29,7 +29,6 @@ in {
   imports = [
     (aux "hacl-1" "https://github.com/hacl-star/hacl-star")
     (aux "hacl-2" "https://github.com/hacl-star/hacl-star")
-    (aux "hacl-3" "https://github.com/hacl-star/hacl-star")
     (aux "hacl-nix" "https://github.com/hacl-star/hacl-nix")
     (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
     (aux "charon" "https://github.com/aeneasverif/charon")

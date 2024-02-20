@@ -11,7 +11,6 @@ in {
   # github runners
   "github-runner-hacl-1-ci-token.age".publicKeys = keys;
   "github-runner-hacl-2-ci-token.age".publicKeys = keys;
-  "github-runner-hacl-3-ci-token.age".publicKeys = keys;
   "github-runner-hacl-nix-ci-token.age".publicKeys = keys;
   "github-runner-starmalloc-ci-token.age".publicKeys = keys;
   "github-runner-charon-ci-token.age".publicKeys = keys;
