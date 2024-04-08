@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: {
-  age.secrets.gitlab-runner-registration = {
-    file = ./secrets/gitlab-runner-registration.age;
+  age.secrets.gitlab-runner-cryptoverif-registration = {
+    file = ./secrets/gitlab-runner-cryptoverif-registration.age;
     owner = "gitlab-runner";
     mode = "0440";
   };
@@ -19,9 +19,9 @@
   services.gitlab-runner = {
     enable = true;
 
-    services.nix = {
+    services.cryptoverif = {
       registrationConfigFile =
-        config.age.secrets.gitlab-runner-registration.path;
+        config.age.secrets.gitlab-runner-cryptoverif-registration.path;
       dockerImage = "alpine";
       dockerVolumes = [
         "/nix/store:/nix/store:ro"

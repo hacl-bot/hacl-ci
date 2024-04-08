@@ -21,7 +21,7 @@ in {
   "github-runner-prosecco-green-ci-token.age".publicKeys = keys;
 
   # gitlab runner
-  "gitlab-runner-registration.age".publicKeys = keys;
+  "gitlab-runner-cryptoverif-registration.age".publicKeys = keys;
 
   # cachix
   "cachix-hacl-token.age".publicKeys = keys;
