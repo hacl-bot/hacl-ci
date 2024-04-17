@@ -10,7 +10,7 @@ The hacl-star flake exposes three main packages:
 - `hacl.passthru.resource-monitor`: a log of the CPU and RAM consumption
 
 As mentionned in the overview, hacl-star does not contain a lock file. Every run
-uses the last versions of F* and Karamel.
+uses the latest versions of F* and Karamel.
 
 The main workflow for the hacl-star repository is
 [.github/workflows/nix.yml](https://github.com/hacl-star/hacl-star/blob/main/.github/workflows/nix.yml)
