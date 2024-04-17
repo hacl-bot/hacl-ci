@@ -14,7 +14,7 @@ uses the latest versions of F* and Karamel.
 
 The main workflow for the hacl-star repository is
 [.github/workflows/nix.yml](https://github.com/hacl-star/hacl-star/blob/main/.github/workflows/nix.yml)
-It runs on the self-hosted runner to build hacl, monitor the CPU and RAM
+It runs on two self-hosted runners to build hacl, monitor the CPU and RAM
 consumption of the build, and generate tarballs of the products of the build
 (`hints/` and `dist/`). Build products are then made available as GitHub
 artifacts, attached to each workflow run.
