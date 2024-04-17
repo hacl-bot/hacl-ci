@@ -7,3 +7,4 @@
 - [Troubleshooting](./troubleshooting.md)
 - [Registering a GitHub runner](./registration.md)
 - [Security](./security.md)
+- [Maintenance](./maintenance.md)

@@ -28,6 +28,9 @@ sudo journalctl -xeu github-runner-hacl-1-ci.service
 sudo journalctl -xeu github-runner-hacl-2-ci.service
 ```
 
-If a runner is unable to connect to GitHub, try
-[re-registering](./registration.md) it. Disconnections often happen after an
-update of the runner version.
+If a runner is unable to connect to GitHub, you probably need to do a [system
+update](./maintenance.md) because the runner version is deprecated. This should
+be indicated clearly in the GitHub interface. If the runner is up-to-date and is
+still unable to connect, try [re-registering](./registration.md). Note that
+re-registration is often (but not always) required after an update. Always check
+if the runners re-connected properly after an update!
