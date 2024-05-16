@@ -37,6 +37,7 @@ in {
     (aux "comparse" "https://github.com/twal/comparse")
     (aux "dolev-yao-star" "https://github.com/twal/dolev-yao-star-v3")
     (aux "prosecco-green" "https://github.com/inria-prosecco/prosecco-green")
+    (aux "circus-green" "https://github.com/inria-prosecco/circus-green")
   ];
 
   nixpkgs.config.permittedInsecurePackages = ["nodejs-16.20.2"];
