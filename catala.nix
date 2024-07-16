@@ -1,8 +1,5 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   users.users.demerigo = {
     isNormalUser = true;
     openssh.authorizedKeys.keys = [

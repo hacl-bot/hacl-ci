@@ -3,14 +3,15 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   age.secrets.gitlab-runner-cryptoverif-registration = {
     file = ./secrets/gitlab-runner-cryptoverif-registration.age;
     owner = "gitlab-runner";
     mode = "0440";
   };
 
-  users.groups."gitlab-runner" = {};
+  users.groups."gitlab-runner" = { };
   users.users."gitlab-runner" = {
     isSystemUser = true;
     group = "gitlab-runner";
@@ -20,8 +21,7 @@
     enable = true;
 
     services.cryptoverif = {
-      registrationConfigFile =
-        config.age.secrets.gitlab-runner-cryptoverif-registration.path;
+      registrationConfigFile = config.age.secrets.gitlab-runner-cryptoverif-registration.path;
       dockerImage = "alpine";
       dockerVolumes = [
         "/nix/store:/nix/store:ro"
@@ -46,7 +46,17 @@
 
         . ${pkgs.nix}/etc/profile.d/nix.sh
 
-        ${pkgs.nix}/bin/nix-env -i ${lib.concatStringsSep " " (with pkgs; [nix cacert git openssh])}
+        ${pkgs.nix}/bin/nix-env -i ${
+          lib.concatStringsSep " " (
+            with pkgs;
+            [
+              nix
+              cacert
+              git
+              openssh
+            ]
+          )
+        }
 
         ${pkgs.nix}/bin/nix-channel --add https://nixos.org/channels/nixpkgs-unstable
         ${pkgs.nix}/bin/nix-channel --update nixpkgs
@@ -58,7 +68,7 @@
         PATH = "/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:/bin:/sbin:/usr/bin:/usr/sbin";
         NIX_SSL_CERT_FILE = "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt";
       };
-      tagList = ["nix"];
+      tagList = [ "nix" ];
     };
   };
 

@@ -7,17 +7,22 @@
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    flake-utils,
-    agenix,
-  }:
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {inherit system;};
-    in {
-      packages.doc = pkgs.callPackage ./doc {};
-    })
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      flake-utils,
+      agenix,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
+        packages.doc = pkgs.callPackage ./doc { };
+      }
+    )
     // {
       nixosConfigurations = {
         everest-ci = nixpkgs.lib.nixosSystem {

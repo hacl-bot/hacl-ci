@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cleanup = pkgs.writeShellScript "cleanup.sh" "rm -rf $GITHUB_WORKSPACE/*";
   aux = name: url: {
     age.secrets."github-runner-${name}-ci-token" = {
@@ -16,14 +17,18 @@
       inherit url;
       user = "github-runner";
       tokenFile = config.age.secrets."github-runner-${name}-ci-token".path;
-      nodeRuntimes = ["node16" "node20"];
-      extraLabels = ["nix"];
+      nodeRuntimes = [
+        "node16"
+        "node20"
+      ];
+      extraLabels = [ "nix" ];
       extraEnvironment.ACTIONS_RUNNER_HOOK_JOB_STARTED = cleanup;
       extraEnvironment.ACTIONS_RUNNER_HOOK_JOB_COMPLETED = cleanup;
     };
   };
-in {
-  users.groups."github-runner" = {};
+in
+{
+  users.groups."github-runner" = { };
   users.users."github-runner" = {
     isSystemUser = true;
     group = "github-runner";
@@ -43,5 +48,5 @@ in {
     (aux "circus-green" "https://github.com/inria-prosecco/circus-green")
   ];
 
-  nixpkgs.config.permittedInsecurePackages = ["nodejs-16.20.2"];
+  nixpkgs.config.permittedInsecurePackages = [ "nodejs-16.20.2" ];
 }

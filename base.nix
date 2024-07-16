@@ -1,8 +1,5 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -20,22 +17,32 @@
 
   users.users.everest = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = import ./keys.nix;
   };
 
-  environment.systemPackages = with pkgs; [vim wget htop git tmux jq];
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    htop
+    git
+    tmux
+    jq
+  ];
 
   services.openssh = {
     enable = true;
     settings.PermitRootLogin = "no";
     settings.PasswordAuthentication = false;
-    ports = [22];
+    ports = [ 22 ];
   };
 
   nix = {
-    settings.trusted-users = ["@wheel"];
-    settings.experimental-features = ["nix-command" "flakes"];
+    settings.trusted-users = [ "@wheel" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     gc = {
       automatic = true;
       dates = "weekly";
@@ -64,7 +71,10 @@
       sslCertificateKey = config.age.secrets."everest-ci.key".path;
     };
   };
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
