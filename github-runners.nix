@@ -4,6 +4,7 @@
   pkgs,
   ...
 }: let
+  cleanup = pkgs.writeShellScript "cleanup.sh" "rm -rf $GITHUB_WORKSPACE/*";
   aux = name: url: {
     age.secrets."github-runner-${name}-ci-token" = {
       file = ./secrets/github-runner-${name}-ci-token.age;
@@ -17,6 +18,8 @@
       tokenFile = config.age.secrets."github-runner-${name}-ci-token".path;
       nodeRuntimes = ["node16" "node20"];
       extraLabels = ["nix"];
+      extraEnvironment.ACTIONS_RUNNER_HOOK_JOB_STARTED = cleanup;
+      extraEnvironment.ACTIONS_RUNNER_HOOK_JOB_COMPLETED = cleanup;
     };
   };
 in {
