@@ -1,6 +1,6 @@
 # Maintenance
 
-`everest-ci` runs NixOS. The system configuration is contained in the flake
+The CI machine runs NixOS. The system configuration is contained in the flake
 [github:hacl-bot/hacl-ci](https://github.com/hacl-bot/hacl-ci). Deployment of
 the configuration is acheived from Inria's local network or through the VPN by
 running the `switch.sh` script.

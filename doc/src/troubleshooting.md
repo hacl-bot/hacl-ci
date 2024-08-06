@@ -1,10 +1,10 @@
 # Troubleshooting
 
-Once your ssh key has been added to the `everest-ci` config, you can access the
-machine from Inria's internal network or through Inria's VPN:
+Once your ssh key has been added to the NixOS config, you can access the machine
+from Inria's internal network or through Inria's VPN:
 
 ```bash
-ssh everest@everest-ci.paris.inria.fr
+ssh hacl@128.93.101.164
 ```
 
 You can inspect the GitHub runners:

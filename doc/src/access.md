@@ -1,6 +1,6 @@
 # Access
 
-To give `sudo` access to `everest-ci` to someone, add the person's ssh key to
+To give `sudo` access to the machine to someone, add the person's ssh key to
 `./keys.nix` in the hacl-ci repository. Then re-encrypt the secrets for that
 key.
 
