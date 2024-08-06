@@ -49,6 +49,8 @@
     };
   };
 
+  services.earlyoom.enable = true;
+
   age.secrets."everest-ci.cer" = {
     file = ./secrets/everest-ci.cer.age;
     owner = config.services.nginx.user;
