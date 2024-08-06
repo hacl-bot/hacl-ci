@@ -3,7 +3,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "everest-ci";
+  networking.hostName = "hacl-ci";
 
   time.timeZone = "Europe/Paris";
 
@@ -15,7 +15,7 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  users.users.everest = {
+  users.users.hacl = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = import ./keys.nix;
