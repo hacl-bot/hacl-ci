@@ -29,7 +29,6 @@
             agenix.nixosModules.age
             ./base.nix
             ./hardware.nix
-            ./fusion-inventory.nix
             ./github-runners.nix
             ./gitlab-runner.nix
             ./cachix.nix
