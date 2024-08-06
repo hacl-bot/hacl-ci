@@ -43,7 +43,7 @@ in
     (aux "aeneas" "https://github.com/aeneasverif/aeneas")
     (aux "mls-star" "https://github.com/inria-prosecco/mls-star")
     (aux "comparse" "https://github.com/twal/comparse")
-    (aux "dolev-yao-star" "https://github.com/twal/dolev-yao-star-v3")
+    (aux "dolev-yao-star" "https://github.com/reprosec/dolev-yao-star-extrinsic")
     (aux "prosecco-green" "https://github.com/inria-prosecco/prosecco-green")
     (aux "circus-green" "https://github.com/inria-prosecco/circus-green")
   ];
