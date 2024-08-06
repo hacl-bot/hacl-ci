@@ -2,13 +2,6 @@ let
   keys = import ../keys.nix;
 in
 {
-  # https certificate
-  "everest-ci.cer.age".publicKeys = keys;
-  "everest-ci.key.age".publicKeys = keys;
-
-  # binary cache
-  "cache-priv-key.age".publicKeys = keys;
-
   # github runners
   "github-runner-hacl-1-ci-token.age".publicKeys = keys;
   "github-runner-hacl-2-ci-token.age".publicKeys = keys;

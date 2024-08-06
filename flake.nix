@@ -33,11 +33,9 @@
             ./hardware.nix
             ./fusion-inventory.nix
             #./catala.nix
-            ./cache.nix
             ./github-runners.nix
             ./gitlab-runner.nix
             ./cachix.nix
-            ./doc.nix
           ];
         };
       };

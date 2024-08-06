@@ -51,33 +51,6 @@
 
   services.earlyoom.enable = true;
 
-  age.secrets."everest-ci.cer" = {
-    file = ./secrets/everest-ci.cer.age;
-    owner = config.services.nginx.user;
-    group = config.services.nginx.group;
-  };
-  age.secrets."everest-ci.key" = {
-    file = ./secrets/everest-ci.key.age;
-    owner = config.services.nginx.user;
-    group = config.services.nginx.group;
-  };
-  services.nginx = {
-    enable = true;
-    recommendedTlsSettings = true;
-    recommendedProxySettings = true;
-
-    virtualHosts."everest-ci.paris.inria.fr" = {
-      default = true;
-      forceSSL = true;
-      sslCertificate = config.age.secrets."everest-ci.cer".path;
-      sslCertificateKey = config.age.secrets."everest-ci.key".path;
-    };
-  };
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-  ];
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
