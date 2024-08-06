@@ -2,8 +2,8 @@
   description = "Everest CI";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    flake-utils.url = "flake-utils";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
     agenix.url = "github:ryantm/agenix";
   };
 
