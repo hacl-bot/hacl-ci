@@ -30,7 +30,6 @@
             ./base.nix
             ./hardware.nix
             ./fusion-inventory.nix
-            #./catala.nix
             ./github-runners.nix
             ./gitlab-runner.nix
             ./cachix.nix
