@@ -20,4 +20,7 @@ in
 
   # cachix
   "cachix-hacl-token.age".publicKeys = keys;
+
+  # hacl-bot credentials
+  "hacl-bot.age".publicKeys = keys;
 }
