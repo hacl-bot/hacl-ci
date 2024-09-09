@@ -16,7 +16,7 @@ runner and copy the token that's given somewhere in the script.
 Go to `./secrets` and edit the token:
 
 ```bash
-nix run github:ryantm/agenix -- -e ./github-runner-hacl-ci-token.age
+nix run github:ryantm/agenix -- -e github-runner-hacl-ci-token.age
 ```
 
 Then deploy the new configuration by running `./switch.sh`.

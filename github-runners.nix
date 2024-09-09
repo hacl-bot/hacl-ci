@@ -1,8 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }:
 let
   cleanup = pkgs.writeShellScript "cleanup.sh" "rm -rf $GITHUB_WORKSPACE/*";
@@ -41,6 +40,7 @@ in
     (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
     (aux "charon" "https://github.com/aeneasverif/charon")
     (aux "aeneas" "https://github.com/aeneasverif/aeneas")
+    (aux "eurydice" "https://github.com/aeneasverif/eurydice")
     (aux "mls-star" "https://github.com/inria-prosecco/mls-star")
     (aux "comparse" "https://github.com/twal/comparse")
     (aux "dolev-yao-star" "https://github.com/reprosec/dolev-yao-star-extrinsic")

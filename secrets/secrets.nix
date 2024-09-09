@@ -9,6 +9,7 @@ in
   "github-runner-starmalloc-ci-token.age".publicKeys = keys;
   "github-runner-charon-ci-token.age".publicKeys = keys;
   "github-runner-aeneas-ci-token.age".publicKeys = keys;
+  "github-runner-eurydice-ci-token.age".publicKeys = keys;
   "github-runner-mls-star-ci-token.age".publicKeys = keys;
   "github-runner-comparse-ci-token.age".publicKeys = keys;
   "github-runner-dolev-yao-star-ci-token.age".publicKeys = keys;
