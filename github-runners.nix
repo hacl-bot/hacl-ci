@@ -41,6 +41,7 @@ in
     (aux "charon" "https://github.com/aeneasverif/charon")
     (aux "charon-2" "https://github.com/aeneasverif/charon")
     (aux "aeneas" "https://github.com/aeneasverif/aeneas")
+    (aux "aeneas-2" "https://github.com/aeneasverif/aeneas")
     (aux "eurydice" "https://github.com/aeneasverif/eurydice")
     (aux "mls-star" "https://github.com/inria-prosecco/mls-star")
     (aux "comparse" "https://github.com/twal/comparse")
