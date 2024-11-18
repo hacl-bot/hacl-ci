@@ -39,6 +39,7 @@ in
     (aux "hacl-nix" "https://github.com/hacl-star/hacl-nix")
     (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
     (aux "charon" "https://github.com/aeneasverif/charon")
+    (aux "charon-2" "https://github.com/aeneasverif/charon")
     (aux "aeneas" "https://github.com/aeneasverif/aeneas")
     (aux "eurydice" "https://github.com/aeneasverif/eurydice")
     (aux "mls-star" "https://github.com/inria-prosecco/mls-star")
