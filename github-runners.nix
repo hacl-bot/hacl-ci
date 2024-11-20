@@ -41,6 +41,7 @@ in
     (aux "circus-green" "https://github.com/inria-prosecco/circus-green")
     (aux "comparse" "https://github.com/twal/comparse")
     (aux "dolev-yao-star" "https://github.com/reprosec/dolev-yao-star-extrinsic")
+    (aux "dolev-yao-star-tutorial" "https://github.com/reprosec/dolev-yao-star-tutorial-code")
     (aux "eurydice" "https://github.com/aeneasverif/eurydice")
     (aux "hacl-1" "https://github.com/hacl-star/hacl-star")
     (aux "hacl-2" "https://github.com/hacl-star/hacl-star")
