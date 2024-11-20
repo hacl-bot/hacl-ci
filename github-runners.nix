@@ -34,20 +34,20 @@ in
   };
 
   imports = [
+    (aux "aeneas-2" "https://github.com/aeneasverif/aeneas")
+    (aux "aeneas" "https://github.com/aeneasverif/aeneas")
+    (aux "charon-2" "https://github.com/aeneasverif/charon")
+    (aux "charon" "https://github.com/aeneasverif/charon")
+    (aux "circus-green" "https://github.com/inria-prosecco/circus-green")
+    (aux "comparse" "https://github.com/twal/comparse")
+    (aux "dolev-yao-star" "https://github.com/reprosec/dolev-yao-star-extrinsic")
+    (aux "eurydice" "https://github.com/aeneasverif/eurydice")
     (aux "hacl-1" "https://github.com/hacl-star/hacl-star")
     (aux "hacl-2" "https://github.com/hacl-star/hacl-star")
     (aux "hacl-nix" "https://github.com/hacl-star/hacl-nix")
-    (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
-    (aux "charon" "https://github.com/aeneasverif/charon")
-    (aux "charon-2" "https://github.com/aeneasverif/charon")
-    (aux "aeneas" "https://github.com/aeneasverif/aeneas")
-    (aux "aeneas-2" "https://github.com/aeneasverif/aeneas")
-    (aux "eurydice" "https://github.com/aeneasverif/eurydice")
     (aux "mls-star" "https://github.com/inria-prosecco/mls-star")
-    (aux "comparse" "https://github.com/twal/comparse")
-    (aux "dolev-yao-star" "https://github.com/reprosec/dolev-yao-star-extrinsic")
     (aux "prosecco-green" "https://github.com/inria-prosecco/prosecco-green")
-    (aux "circus-green" "https://github.com/inria-prosecco/circus-green")
+    (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
   ];
 
   nixpkgs.config.permittedInsecurePackages = [ "nodejs-16.20.2" ];
