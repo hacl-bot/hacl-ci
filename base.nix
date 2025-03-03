@@ -2,6 +2,8 @@
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # Mount `/run` with more space because runners use it for their temporary files.
+  boot.runSize = "50%";
 
   networking.hostName = "hacl-ci";
 
