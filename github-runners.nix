@@ -48,6 +48,7 @@ in
     (aux "hacl-nix" "https://github.com/hacl-star/hacl-nix")
     (aux "mls-star" "https://github.com/inria-prosecco/mls-star")
     (aux "prosecco-green" "https://github.com/inria-prosecco/prosecco-green")
+    (aux "scylla" "https://github.com/aeneasverif/scylla")
     (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
   ];
 
