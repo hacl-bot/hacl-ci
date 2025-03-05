@@ -26,7 +26,7 @@ in
     cachixTokenFile = config.age.secrets.cachix-hacl-token.path;
   };
 
-  systemd.services.cachix-watch-store-aget.serviceConfig = {
+  systemd.services.cachix-watch-store-agent.serviceConfig = {
     DynamicUser = lib.mkForce false;
     User = user;
     Group = user;
