@@ -34,6 +34,7 @@ in
   };
 
   imports = [
+    (aux "aeneasverif1" "https://github.com/aeneasverif")
     (aux "aeneas-2" "https://github.com/aeneasverif/aeneas")
     (aux "aeneas" "https://github.com/aeneasverif/aeneas")
     (aux "charon-2" "https://github.com/aeneasverif/charon")

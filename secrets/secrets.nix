@@ -3,6 +3,7 @@ let
 in
 {
   # github runners
+  "github-runner-aeneasverif1-ci-token.age".publicKeys = keys;
   "github-runner-aeneas-2-ci-token.age".publicKeys = keys;
   "github-runner-aeneas-ci-token.age".publicKeys = keys;
   "github-runner-charon-2-ci-token.age".publicKeys = keys;
