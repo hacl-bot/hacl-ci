@@ -4,6 +4,13 @@ in
 {
   # github runners
   "github-runner-aeneasverif1-ci-token.age".publicKeys = keys;
+  "github-runner-aeneasverif2-ci-token.age".publicKeys = keys;
+  "github-runner-aeneasverif3-ci-token.age".publicKeys = keys;
+  "github-runner-aeneasverif4-ci-token.age".publicKeys = keys;
+  "github-runner-aeneasverif5-ci-token.age".publicKeys = keys;
+  "github-runner-aeneasverif6-ci-token.age".publicKeys = keys;
+  "github-runner-aeneasverif7-ci-token.age".publicKeys = keys;
+  "github-runner-aeneasverif8-ci-token.age".publicKeys = keys;
   "github-runner-aeneas-2-ci-token.age".publicKeys = keys;
   "github-runner-aeneas-ci-token.age".publicKeys = keys;
   "github-runner-charon-2-ci-token.age".publicKeys = keys;

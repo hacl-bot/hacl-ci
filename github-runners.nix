@@ -35,6 +35,13 @@ in
 
   imports = [
     (aux "aeneasverif1" "https://github.com/aeneasverif")
+    (aux "aeneasverif2" "https://github.com/aeneasverif")
+    (aux "aeneasverif3" "https://github.com/aeneasverif")
+    (aux "aeneasverif4" "https://github.com/aeneasverif")
+    (aux "aeneasverif5" "https://github.com/aeneasverif")
+    (aux "aeneasverif6" "https://github.com/aeneasverif")
+    (aux "aeneasverif7" "https://github.com/aeneasverif")
+    (aux "aeneasverif8" "https://github.com/aeneasverif")
     (aux "aeneas-2" "https://github.com/aeneasverif/aeneas")
     (aux "aeneas" "https://github.com/aeneasverif/aeneas")
     (aux "charon-2" "https://github.com/aeneasverif/charon")
