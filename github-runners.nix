@@ -44,8 +44,6 @@ in
     (aux "aeneasverif8" "https://github.com/aeneasverif")
     (aux "aeneas-2" "https://github.com/aeneasverif/aeneas")
     (aux "aeneas" "https://github.com/aeneasverif/aeneas")
-    (aux "charon-2" "https://github.com/aeneasverif/charon")
-    (aux "charon" "https://github.com/aeneasverif/charon")
     (aux "circus-green" "https://github.com/inria-prosecco/circus-green")
     (aux "comparse" "https://github.com/twal/comparse")
     (aux "dolev-yao-star" "https://github.com/reprosec/dolev-yao-star-extrinsic")
