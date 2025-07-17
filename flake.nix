@@ -6,21 +6,27 @@
   };
 
   outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      flake-utils,
-      agenix,
+    { self
+    , nixpkgs
+    , flake-utils
+    , agenix
+    ,
     }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-      in
-      {
-        packages.doc = pkgs.callPackage ./doc { };
-      }
-    )
+    flake-utils.lib.eachDefaultSystem
+      (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+        in
+        {
+          packages.doc = pkgs.callPackage ./doc { };
+          devShells.default = pkgs.mkShell {
+            packages = [
+              pkgs.nixos-rebuild
+            ];
+          };
+        }
+      )
     // {
       nixosConfigurations = {
         hacl-ci = nixpkgs.lib.nixosSystem {
