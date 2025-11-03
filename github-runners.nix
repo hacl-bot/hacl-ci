@@ -17,8 +17,8 @@ let
       user = "github-runner";
       tokenFile = config.age.secrets."github-runner-${name}-ci-token".path;
       nodeRuntimes = [
-        "node16"
         "node20"
+        "node24"
       ];
       extraLabels = [ "nix" ];
       extraEnvironment.ACTIONS_RUNNER_HOOK_JOB_STARTED = cleanup;
