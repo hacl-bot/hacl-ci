@@ -16,6 +16,7 @@ let
       inherit url;
       user = "github-runner";
       tokenFile = config.age.secrets."github-runner-${name}-ci-token".path;
+      workDir = "%S/github-runner-work/${name}";
       nodeRuntimes = [
         "node20"
         "node24"
@@ -23,6 +24,7 @@ let
       extraLabels = [ "nix" ];
       extraEnvironment.ACTIONS_RUNNER_HOOK_JOB_STARTED = cleanup;
       extraEnvironment.ACTIONS_RUNNER_HOOK_JOB_COMPLETED = cleanup;
+      serviceOverrides.StateDirectory = lib.mkBefore [ "github-runner-work/${name}" ];
     };
   };
 in
@@ -32,6 +34,7 @@ in
     isSystemUser = true;
     group = "github-runner";
   };
+  environment.systemPackages = [ pkgs.github-runner ];
 
   imports = [
     (aux "aeneasverif1" "https://github.com/aeneasverif")
@@ -43,15 +46,15 @@ in
     (aux "aeneasverif7" "https://github.com/aeneasverif")
     (aux "aeneasverif8" "https://github.com/aeneasverif")
     (aux "circus-green" "https://github.com/inria-prosecco/circus-green")
-    (aux "comparse" "https://github.com/twal/comparse")
-    (aux "dolev-yao-star" "https://github.com/reprosec/dolev-yao-star-extrinsic")
-    (aux "dolev-yao-star-tutorial" "https://github.com/reprosec/dolev-yao-star-tutorial-code")
-    (aux "hacl-1" "https://github.com/hacl-star/hacl-star")
-    (aux "hacl-2" "https://github.com/hacl-star/hacl-star")
+    # (aux "comparse" "https://github.com/twal/comparse")
+    # (aux "dolev-yao-star" "https://github.com/reprosec/dolev-yao-star-extrinsic")
+    # (aux "dolev-yao-star-tutorial" "https://github.com/reprosec/dolev-yao-star-tutorial-code")
+    # (aux "hacl-1" "https://github.com/hacl-star/hacl-star")
+    # (aux "hacl-2" "https://github.com/hacl-star/hacl-star")
     (aux "hacl-nix" "https://github.com/hacl-star/hacl-nix")
-    (aux "mls-star" "https://github.com/inria-prosecco/mls-star")
+    # (aux "mls-star" "https://github.com/inria-prosecco/mls-star")
     (aux "prosecco-green" "https://github.com/inria-prosecco/prosecco-green")
-    (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
+    # (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
   ];
 
   nixpkgs.config.permittedInsecurePackages = [ "nodejs-16.20.2" ];
