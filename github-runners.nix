@@ -54,7 +54,7 @@ in
     (aux "hacl-nix" "https://github.com/hacl-star/hacl-nix")
     (aux "mls-star" "https://github.com/inria-prosecco/mls-star")
     (aux "prosecco-green" "https://github.com/inria-prosecco/prosecco-green")
-    # (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
+    (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
   ];
 
   nixpkgs.config.permittedInsecurePackages = [ "nodejs-16.20.2" ];
