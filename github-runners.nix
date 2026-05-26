@@ -17,8 +17,8 @@ let
       user = "github-runner";
       tokenFile = config.age.secrets."github-runner-${name}-ci-token".path;
       workDir = "%S/github-runner-work/${name}";
-      # Doesn't seem to be taken into account...
       nodeRuntimes = [
+        "node20"
         "node24"
       ];
       extraLabels = [ "nix" ];
