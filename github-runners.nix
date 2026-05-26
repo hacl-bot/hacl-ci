@@ -17,8 +17,8 @@ let
       user = "github-runner";
       tokenFile = config.age.secrets."github-runner-${name}-ci-token".path;
       workDir = "%S/github-runner-work/${name}";
+      # Doesn't seem to be taken into account...
       nodeRuntimes = [
-        "node20"
         "node24"
       ];
       extraLabels = [ "nix" ];
@@ -57,5 +57,9 @@ in
     (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [ "nodejs-16.20.2" ];
+  nixpkgs.config.permittedInsecurePackages = [
+    # Remove when the runner doesn't depend on these anymore
+    "nodejs-20.20.2"
+    "nodejs-slim-20.20.2"
+  ];
 }
