@@ -5,6 +5,7 @@
 let
   user = "charon-zulip-bot";
   stateDirectory = "charon-zulip-bot";
+  botStateDirectory = "charon-zulip-bot-state";
   workerPrefix = "charon-zulip-bot-worker-";
 
   update = pkgs.writeShellApplication {
@@ -71,16 +72,18 @@ let
           --property=TimeoutStopSec=1min \
           --property=KillMode=mixed \
           --property=UMask=0077 \
+          --property=StateDirectory=${botStateDirectory} \
+          --property=StateDirectoryMode=0700 \
           --property=NoNewPrivileges=yes \
           --property=PrivateDevices=yes \
           --property=PrivateTmp=yes \
           --property=ProtectControlGroups=yes \
           --property=ProtectHome=yes \
           --property=ProtectKernelModules=yes \
-          --property=ProtectKernelTunables=yes \
+          --property=ProtectKernelTunables=no \
           --property=ProtectSystem=strict \
           --property=RestrictSUIDSGID=yes \
-          --property='RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6' \
+          --property='RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK' \
           "$release/bin/charon-zulip-bot" ${config.age.secrets.charon-bot.path}
         then
           return 1
@@ -196,7 +199,9 @@ in
 
     systemd.services.charon-zulip-bot-update = {
       description = "Update the Charon Zulip bot";
-      wantedBy = [ "multi-user.target" ];
+      # A NixOS switch must not wait for (or interrupt) a potentially long
+      # bot build. The timer starts this service asynchronously instead.
+      restartIfChanged = false;
       wants = [ "network-online.target" ];
       after = [
         "network-online.target"
@@ -219,7 +224,7 @@ in
       description = "Poll GitHub for Charon Zulip bot updates";
       wantedBy = [ "timers.target" ];
       timerConfig = {
-        OnBootSec = "3min";
+        OnBootSec = "5s";
         OnUnitInactiveSec = "3min";
         AccuracySec = "10s";
         Persistent = true;
