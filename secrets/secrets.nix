@@ -39,4 +39,6 @@ in
 
   # Charon Zulip bot credentials
   "charon-bot.age".publicKeys = keys;
+  "charon-bot-repo-key.age".publicKeys = keys;
+  "charon-bot-repo.age".publicKeys = keys;
 }

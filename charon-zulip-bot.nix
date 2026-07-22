@@ -13,15 +13,30 @@ let
       coreutils
       git
       gnugrep
+      jq
       nix
+      openssh
       systemd
     ];
     text = ''
       state_directory=/var/lib/${stateDirectory}
       releases_directory="$state_directory/releases"
       current_file="$state_directory/current"
-      repository=https://github.com/AeneasVerif/charon.git
-      branch=main
+      repository=$(jq --exit-status --raw-output \
+        '.repository | select(type == "string")' "$CREDENTIALS_DIRECTORY/repository")
+      branch=$(jq --exit-status --raw-output \
+        '.branch | select(type == "string")' "$CREDENTIALS_DIRECTORY/repository")
+      if [[ ! "$repository" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]; then
+        echo "The Charon bot repository must have the form OWNER/REPOSITORY" >&2
+        exit 1
+      fi
+      if [[ ! "$branch" =~ ^[A-Za-z0-9._/-]+$ ]]; then
+        echo "The Charon bot repository branch contains unsupported characters" >&2
+        exit 1
+      fi
+
+      ssh_repository="ssh://git@github.com/$repository.git"
+      ssh_command="ssh -i $CREDENTIALS_DIRECTORY/repository-key -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/etc/ssh/ssh_known_hosts"
 
       mkdir -p "$releases_directory"
 
@@ -105,10 +120,11 @@ let
         previous_revision=
       fi
 
-      remote_line=$(git ls-remote --exit-code "$repository" "refs/heads/$branch")
+      remote_line=$(git -c core.sshCommand="$ssh_command" ls-remote \
+        --exit-code "$ssh_repository" "refs/heads/$branch")
       read -r revision remote_ref <<< "$remote_line"
       if [[ ! "$revision" =~ ^[0-9a-f]{40}$ ]] || [[ "$remote_ref" != "refs/heads/$branch" ]]; then
-        echo "Could not resolve $repository branch $branch" >&2
+        echo "Could not resolve the Charon bot repository branch $branch" >&2
         exit 1
       fi
 
@@ -121,10 +137,10 @@ let
       fi
 
       echo "Building Charon Zulip bot at $revision"
-      nix --extra-experimental-features 'nix-command flakes' build \
+      GIT_SSH_COMMAND="$ssh_command" nix --extra-experimental-features 'nix-command flakes' build \
         --no-write-lock-file \
         --out-link "$release_link" \
-        "github:AeneasVerif/charon/$revision#zulip_bot"
+        "git+$ssh_repository?ref=$branch&rev=$revision#zulip_bot"
       release=$(readlink -e "$release_link")
 
       if ! start_worker "$revision" "$release"; then
@@ -155,45 +171,60 @@ let
   };
 in
 {
-  users.groups.${user} = { };
-  users.users.${user} = {
-    isSystemUser = true;
-    group = user;
-  };
-
-  age.secrets.charon-bot = {
-    file = ./secrets/charon-bot.age;
-    owner = user;
-    group = user;
-    mode = "0400";
-  };
-
-  systemd.services.charon-zulip-bot-update = {
-    description = "Update the Charon Zulip bot";
-    wantedBy = [ "multi-user.target" ];
-    wants = [ "network-online.target" ];
-    after = [
-      "network-online.target"
-      "nix-daemon.service"
-    ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${update}/bin/update-charon-zulip-bot";
-      StateDirectory = stateDirectory;
-      StateDirectoryMode = "0755";
-      TimeoutStartSec = "1h";
+  config = {
+    users.groups.${user} = { };
+    users.users.${user} = {
+      isSystemUser = true;
+      group = user;
     };
-  };
 
-  systemd.timers.charon-zulip-bot-update = {
-    description = "Poll GitHub for Charon Zulip bot updates";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnBootSec = "3min";
-      OnUnitInactiveSec = "3min";
-      AccuracySec = "10s";
-      Persistent = true;
-      Unit = "charon-zulip-bot-update.service";
+    age.secrets = {
+      charon-bot = {
+        file = ./secrets/charon-bot.age;
+        owner = user;
+        group = user;
+        mode = "0400";
+      };
+      charon-bot-repo-key.file = ./secrets/charon-bot-repo-key.age;
+      charon-bot-repo.file = ./secrets/charon-bot-repo.age;
+    };
+
+    programs.ssh.knownHosts."github.com" = {
+      hostNames = [ "github.com" ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+    };
+
+    systemd.services.charon-zulip-bot-update = {
+      description = "Update the Charon Zulip bot";
+      wantedBy = [ "multi-user.target" ];
+      wants = [ "network-online.target" ];
+      after = [
+        "network-online.target"
+        "nix-daemon.service"
+      ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${update}/bin/update-charon-zulip-bot";
+        LoadCredential = [
+          "repository-key:${config.age.secrets.charon-bot-repo-key.path}"
+          "repository:${config.age.secrets.charon-bot-repo.path}"
+        ];
+        StateDirectory = stateDirectory;
+        StateDirectoryMode = "0755";
+        TimeoutStartSec = "1h";
+      };
+    };
+
+    systemd.timers.charon-zulip-bot-update = {
+      description = "Poll GitHub for Charon Zulip bot updates";
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnBootSec = "3min";
+        OnUnitInactiveSec = "3min";
+        AccuracySec = "10s";
+        Persistent = true;
+        Unit = "charon-zulip-bot-update.service";
+      };
     };
   };
 }
