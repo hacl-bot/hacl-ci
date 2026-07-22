@@ -36,4 +36,7 @@ in
 
   # hacl-bot credentials
   "hacl-bot.age".publicKeys = keys;
+
+  # Charon Zulip bot credentials
+  "charon-bot.age".publicKeys = keys;
 }

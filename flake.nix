@@ -38,6 +38,7 @@
             ./github-runners.nix
             ./gitlab-runner.nix
             ./cachix.nix
+            ./charon-zulip-bot.nix
           ];
         };
       };
