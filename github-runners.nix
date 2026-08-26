@@ -18,7 +18,6 @@ let
       tokenFile = config.age.secrets."github-runner-${name}-ci-token".path;
       workDir = "%S/github-runner-work/${name}";
       nodeRuntimes = [
-        "node20"
         "node24"
       ];
       extraLabels = [ "nix" ];
@@ -55,11 +54,5 @@ in
     (aux "mls-star" "https://github.com/inria-prosecco/mls-star")
     (aux "prosecco-green" "https://github.com/inria-prosecco/prosecco-green")
     (aux "starmalloc" "https://github.com/inria-prosecco/starmalloc")
-  ];
-
-  nixpkgs.config.permittedInsecurePackages = [
-    # Remove when the runner doesn't depend on these anymore
-    "nodejs-20.20.2"
-    "nodejs-slim-20.20.2"
   ];
 }
