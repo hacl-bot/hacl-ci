@@ -4,7 +4,6 @@
 , ...
 }:
 let
-  cleanup = pkgs.writeShellScript "cleanup.sh" "rm -rf $GITHUB_WORKSPACE/*";
   aux = name: url: {
     age.secrets."github-runner-${name}-ci-token" = {
       file = ./secrets/github-runner-${name}-ci-token.age;
@@ -21,9 +20,16 @@ let
         "node24"
       ];
       extraLabels = [ "nix" ];
-      extraEnvironment.ACTIONS_RUNNER_HOOK_JOB_STARTED = cleanup;
-      extraEnvironment.ACTIONS_RUNNER_HOOK_JOB_COMPLETED = cleanup;
-      serviceOverrides.StateDirectory = lib.mkBefore [ "github-runner-work/${name}" ];
+      serviceOverrides = {
+        StateDirectory = lib.mkBefore [ "github-runner-work/${name}" ];
+        # Restart after each job to wipe any state.
+        # Note: GitHub plans to deprecate --once; we'll need to setup ephemeral
+        # mode when that happens..
+        ExecStart = lib.mkForce "${config.services.github-runners."${name}-ci".package}/bin/Runner.Listener run --startuptype service --once";
+        Restart = lib.mkForce "always";
+        RestartSec = 5;
+        PrivateIPC = true;
+      };
     };
   };
 in
